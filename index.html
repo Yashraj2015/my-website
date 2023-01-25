@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxicons-master/css/boxicons.css">
+    <SCRIPT language="JavaScript">
+      <!----hide
+
+      var password;
+
+      var pass1="Jarvis@Yashraj2010";
+
+      password=prompt('Enter the Password to start Jarvis!',' ')
+
+      if (password==pass1)
+        alert('Password Correct! Started Jarvis Successfully!');
+
+      else
+         {
+          window.location="https://google.com"
+         }
+
+      //-->
+    </SCRIPT>
+  </head>
+  <head>
+    <title>JARVIS</title>
+    <style>
+        p{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 3em;
+        }
+    </style>
+  </head>
+  <body>
+    
+    <p id="output"></p>
+    <script>
+      // Check if the browser supports the Web Speech API
+      if ('webkitSpeechRecognition' in window) {
+        // Request permission to use the microphone
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+          let Speak = "";
+          const recognition = new webkitSpeechRecognition();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+          recognition.start();
+          recognition.onresult = event => {
+            let interimTranscript = "";
+            let finalTranscript = "";
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript;
+                    if (finalTranscript.includes('hello')) {
+                        Speak = "Hello, how can I help you?";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                    if (finalTranscript.includes('how are you')) {
+                        Speak = "I'm fine what about you";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                    if (finalTranscript.includes('check my assignments')) {
+                        window.open('https://classroom.google.com/u/1/c/NTMxMDQyNDc1NDQ5', '_blank');
+                        Speak = "Sir, these are the assignments you gotta do for today";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                    if (finalTranscript.includes('open youtube')) {
+                        window.open('https://www.youtube.com/', '_blank');
+                        Speak = "Successfully opened youtube";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                    if (finalTranscript.includes('tell us about you')) {
+                        Speak = "Hello everyone, I am Jarvis and I am here to help ya'll twenty four hours a day, seven days a week, I am an Advanced AI created by Master Shreyash shastri";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                    if (finalTranscript.includes('what is your name')) {
+                        Speak = "My name is Jarvis";
+                        const speech = new SpeechSynthesisUtterance(Speak);
+                        speechSynthesis.speak(speech);
+                    }
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+            document.getElementById('output').innerHTML = Speak;
+          };
+        });
+      }
+    </script>
+  </body>
+</html>
